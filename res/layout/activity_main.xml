@@ -1,0 +1,47 @@
+<RelativeLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button 
+        android:id="@+id/button"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="排序"/>
+    <LinearLayout 
+        android:layout_below="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearlayout"
+        android:orientation="horizontal">
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="灯号"
+            android:gravity="center"/>
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="红灯时间"
+            android:gravity="center"/>
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="绿灯时间"
+            android:gravity="center"/>
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="黄灯时间"
+            android:gravity="center"/>
+        
+    </LinearLayout>
+    <ListView 
+        android:layout_width="match_parent"
+        android:layout_below="@+id/linearlayout"
+        android:layout_height="wrap_content"
+        android:id="@+id/listview"></ListView>
+</RelativeLayout>
