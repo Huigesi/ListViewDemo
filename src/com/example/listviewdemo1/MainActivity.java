@@ -130,7 +130,8 @@ public class MainActivity extends ActionBarActivity {
 
 			@Override
 			public int compare(ItemBean b1, ItemBean b2) {
-				if (b1.getmId()<b2.getmId()) {
+				//易错点总结：最好用>=
+				if (b1.getmId()<=b2.getmId()) {
 					return -1;
 				}else {
 					return 0;
@@ -144,7 +145,8 @@ public class MainActivity extends ActionBarActivity {
 
 			@Override
 			public int compare(ItemBean b1, ItemBean b2) {
-				if (b1.getmId()>b2.getmId()) {
+				//易错点总结：最好用>=
+				if (b1.getmId()>=b2.getmId()) {
 					return -1;
 				}else {
 					return 0;
