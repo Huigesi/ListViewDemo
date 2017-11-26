@@ -15,7 +15,7 @@ public class HttpClients {
 	public HttpClients(){
 		
 	}
-	public final static String sendMessage(String url,String postUrl){
+	public static String sendMessage(String url,String postUrl){
 		String result="";
 		HttpClient mHttpClient=new DefaultHttpClient();
 		HttpPost post =new HttpPost(url);

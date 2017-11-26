@@ -41,7 +41,7 @@ public class DataAdapter extends ArrayAdapter<ItemBean>{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
 		ViewHolder holder=null;
-		
+		//易错点总结1：复制粘贴结果名字没改
 		ItemBean bean=mList.get(position);
 		if(convertView==null){
 			convertView=mInflater.inflate(R.layout.item, parent, false);

@@ -37,6 +37,7 @@ public class MainActivity extends ActionBarActivity {
 	private ListView mListView;
 	private Thread mThread;
 	private String mString;
+	//易错点总结：官方给的api有误（action）
 	private String mPath="http://192.168.1.243:8080/transportservice/type/jason/action/GetTrafficLightConfigAction.do";
 	private int time=0;	
 
@@ -101,6 +102,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 	private void setListView() {
+		//易错点总结：必须是MainActivity.this，不能直接this
 		mAdapter=new DataAdapter(MainActivity.this, mList);
 		mListView.setAdapter(mAdapter);
 	}
@@ -169,6 +171,7 @@ public class MainActivity extends ActionBarActivity {
 			
 			@Override
 			public boolean handleMessage(Message msg) {
+				//易错点总结：必须把对话框去掉再去刷新页面
 				mDialog.dismiss();
 				switch (msg.what) {
 				case UP_DATE:
@@ -186,11 +189,9 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	private void getDialog() {
+		//这里道可以this
 		mDialog=new ProgressDialog(this);
 		mDialog.setMessage("正在加载");
 	}
     
-
-
-  
 }
