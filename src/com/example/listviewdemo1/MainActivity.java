@@ -64,6 +64,7 @@ public class MainActivity extends ActionBarActivity {
 				int count=1;
 				while(count<=5){
 				mHandler.sendEmptyMessage(SHOW_DIALOG);
+				//易错点：官方的post参数也有错，应该为Id,不是ID。
 				mString=HttpClients.sendMessage(mPath,"{\"TrafficLightId\":" +count+ "}");
 				
 				Log.i("mString",mString);
