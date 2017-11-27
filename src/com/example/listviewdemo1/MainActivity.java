@@ -9,6 +9,8 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -22,8 +24,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
@@ -40,6 +46,9 @@ public class MainActivity extends ActionBarActivity {
 	//Ò×´íµã×Ü½á£º¹Ù·½¸øµÄapiÓÐÎó£¨action£©
 	private String mPath="http://192.168.1.243:8080/transportservice/type/jason/action/GetTrafficLightConfigAction.do";
 	private int time=0;	
+	private List<String> arr_list;
+	private ArrayAdapter<String> arr_adapter;
+	private Spinner mSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +83,11 @@ public class MainActivity extends ActionBarActivity {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					mHandler.sendEmptyMessage(UP_DATE);
+					
 				count++;
 				
 				}
-				
+				mHandler.sendEmptyMessage(UP_DATE);
 				super.run();
 			}
 
@@ -106,66 +115,77 @@ public class MainActivity extends ActionBarActivity {
 		//Ò×´íµã×Ü½á£º±ØÐëÊÇMainActivity.this£¬²»ÄÜÖ±½Óthis
 		mAdapter=new DataAdapter(MainActivity.this, mList);
 		mListView.setAdapter(mAdapter);
-	}
+		arr_adapter=new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item,arr_list);
+		arr_adapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
+		mSpinner.setAdapter(arr_adapter);
 
+	}
 
 	private void setListener() {
+		mSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				String item=arr_adapter.getItem(arg2).toString();
+				if(item.equals("µÆºÅÉýÐò")){
+					idSort1();
+				}else if(item.equals("ºìµÆÉýÐò")){
+					redSort1();
+				}else if(item.equals("ÂÌµÆÉýÐò")){
+					greenSort1();
+				}else if(item.equals("»ÆµÆÉýÐò")){
+					yellowSort1();
+				}else if(item.equals("µÆºÅ½µÐò")){
+					idSort2();
+				}else if(item.equals("ºìµÆ½µÐò")){
+					redSort2();
+				}else if(item.equals("ÂÌµÆ½µÐò")){
+					greenSort2();
+				}else if(item.equals("»ÆµÆ½µÐò")){
+					yellowSort2();
+				}
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+
 		mButton.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				time++;
-				if(time%2==0){
-					sort1();
-				}else{
-					sort2();
-				}
+			
 				mHandler.sendEmptyMessage(UP_DATE);
-				
+
 			}
 		});
 	}
-	private void sort1(){
-		Collections.sort(mList,new Comparator<ItemBean>() {
-
-			@Override
-			public int compare(ItemBean b1, ItemBean b2) {
-				//Ò×´íµã×Ü½á£º×îºÃÓÃ>=
-				if (b1.getmId()<=b2.getmId()) {
-					return -1;
-				}else {
-					return 0;
-				}
-				
-			}
-		});
-	}
-	private void sort2(){
-		Collections.sort(mList,new Comparator<ItemBean>() {
-
-			@Override
-			public int compare(ItemBean b1, ItemBean b2) {
-				//Ò×´íµã×Ü½á£º×îºÃÓÃ>=
-				if (b1.getmId()>=b2.getmId()) {
-					return -1;
-				}else {
-					return 0;
-				}
-				
-			}
-		});
-	}
-
+	
 
 	private void initView() {
 		mButton=(Button)findViewById(R.id.button);
 		mListView =(ListView)findViewById(R.id.listview);
+		mSpinner = (Spinner) findViewById(R.id.spinner);
 	}
 
 
 	private void initData() {
 		mList=new ArrayList<ItemBean>();
-		
+		arr_list=new ArrayList<String>();
+		arr_list.add("µÆºÅÉýÐò");
+		arr_list.add("ºìµÆÉýÐò");
+		arr_list.add("ÂÌµÆÉýÐò");
+		arr_list.add("»ÆµÆÉýÐò");
+		arr_list.add("µÆºÅ½µÐò");
+		arr_list.add("ºìµÆ½µÐò");
+		arr_list.add("ÂÌµÆ½µÐò");
+		arr_list.add("»ÆµÆ½µÐò");
 	}
 
 
@@ -196,5 +216,130 @@ public class MainActivity extends ActionBarActivity {
 		mDialog=new ProgressDialog(this);
 		mDialog.setMessage("ÕýÔÚ¼ÓÔØ");
 	}
-    
+	private void redSort1() {
+		Collections.sort(mList, new Comparator<ItemBean>() {
+
+			@Override
+			public int compare(ItemBean b1, ItemBean b2) {
+				if (b1.getmRed() <= b2.getmRed()) {
+					return -1;
+				} else {
+					return 0;
+				}
+
+			}
+		});
+
+	}
+
+	private void redSort2() {
+		Collections.sort(mList, new Comparator<ItemBean>() {
+
+			@Override
+			public int compare(ItemBean b1, ItemBean b2) {
+				if (b1.getmRed() >= b2.getmRed()) {
+					return -1;
+				} else {
+					return 0;
+				}
+
+			}
+		});
+
+	}
+
+	private void greenSort1() {
+		Collections.sort(mList, new Comparator<ItemBean>() {
+
+			@Override
+			public int compare(ItemBean b1, ItemBean b2) {
+				if (b1.getmGreen() <= b2.getmGreen()) {
+					return -1;
+				} else {
+					return 0;
+				}
+
+			}
+		});
+
+	}
+
+	private void greenSort2() {
+		Collections.sort(mList, new Comparator<ItemBean>() {
+
+			@Override
+			public int compare(ItemBean b1, ItemBean b2) {
+				if (b1.getmGreen() >= b2.getmGreen()) {
+					return -1;
+				} else {
+					return 0;
+				}
+
+			}
+		});
+
+	}
+
+	private void yellowSort1() {
+		Collections.sort(mList, new Comparator<ItemBean>() {
+
+			@Override
+			public int compare(ItemBean b1, ItemBean b2) {
+				if (b1.getmYellow() <= b2.getmYellow()) {
+					return -1;
+				} else {
+					return 0;
+				}
+
+			}
+		});
+
+	}
+
+	private void yellowSort2() {
+		Collections.sort(mList, new Comparator<ItemBean>() {
+
+			@Override
+			public int compare(ItemBean b1, ItemBean b2) {
+				if (b1.getmYellow() >= b2.getmYellow()) {
+					return -1;
+				} else {
+					return 0;
+				}
+
+			}
+		});
+	}
+
+	private void idSort1() {
+		Collections.sort(mList, new Comparator<ItemBean>() {
+
+			@Override
+			public int compare(ItemBean b1, ItemBean b2) {
+				if (b1.getmId() <= b2.getmId()) {
+					return -1;
+				} else {
+					return 0;
+				}
+
+			}
+		});
+
+	}
+
+	private void idSort2() {
+		Collections.sort(mList, new Comparator<ItemBean>() {
+
+			@Override
+			public int compare(ItemBean b1, ItemBean b2) {
+				if (b1.getmId() >= b2.getmId()) {
+					return -1;
+				} else {
+					return 0;
+				}
+
+			}
+		});
+
+	}
 }
