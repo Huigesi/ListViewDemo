@@ -87,12 +87,13 @@ public class MainActivity extends ActionBarActivity {
 				count++;
 				
 				}
-				mHandler.sendEmptyMessage(UP_DATE);
 				super.run();
+				mHandler.sendEmptyMessage(UP_DATE);
 			}
+			
 
-		
 		};
+		
 	}
 	private void parseJson(int count) throws Exception{
 		
@@ -106,10 +107,7 @@ public class MainActivity extends ActionBarActivity {
 			bean.setmGreen(mJsonObject.getInt("GreenTime"));
 			bean.setmYellow(mJsonObject.getInt("YellowTime"));
 			mList.add(bean);
-			
-		
 	}
-
 
 	private void setListView() {
 		//易错点总结：必须是MainActivity.this，不能直接this
@@ -150,7 +148,6 @@ public class MainActivity extends ActionBarActivity {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
 				
 			}
 		});
@@ -258,7 +255,6 @@ public class MainActivity extends ActionBarActivity {
 				} else {
 					return 0;
 				}
-
 			}
 		});
 
@@ -290,7 +286,6 @@ public class MainActivity extends ActionBarActivity {
 				} else {
 					return 0;
 				}
-
 			}
 		});
 
