@@ -83,7 +83,6 @@ public class MainActivity extends ActionBarActivity {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
 				count++;
 				
 				}
