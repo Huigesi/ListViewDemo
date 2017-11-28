@@ -125,6 +125,7 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
+				//Ò×´íµã:toStirng
 				String item=arr_adapter.getItem(arg2).toString();
 				if(item.equals("µÆºÅÉýÐò")){
 					idSort1();
