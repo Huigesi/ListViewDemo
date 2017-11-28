@@ -88,6 +88,7 @@ public class MainActivity extends ActionBarActivity {
 				
 				}
 				super.run();
+				//数据弄完后才刷新页面（减少闪退）
 				mHandler.sendEmptyMessage(UP_DATE);
 			}
 			
