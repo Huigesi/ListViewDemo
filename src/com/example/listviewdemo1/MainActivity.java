@@ -219,6 +219,7 @@ public class MainActivity extends ActionBarActivity {
 
 			@Override
 			public int compare(ItemBean b1, ItemBean b2) {
+				//易错点，b1,b2记得改
 				if (b1.getmRed() <= b2.getmRed()) {
 					return -1;
 				} else {
