@@ -60,12 +60,11 @@ public class MainActivity extends ActionBarActivity {
         initView();
         setListener();
         setListView();
-        setThread();
-        mThread.start();
+        //²»ÒªÔÚÒ»¿ªÊ¼Ö´ÐÐ£¬»áÓ°Ïì°´Å¥µãÏÂÈ¥Ê±µÄ½á¹û
+      /*  setThread();
+        mThread.start();*/
 
     }
-
-
 	private void setThread() {
 		mThread=new Thread(){
 			@Override
@@ -87,13 +86,32 @@ public class MainActivity extends ActionBarActivity {
 				
 				}
 				super.run();
+				sort();
 				//Êý¾ÝÅªÍêºó²ÅË¢ÐÂÒ³Ãæ£¨¼õÉÙÉÁÍË£©
 				mHandler.sendEmptyMessage(UP_DATE);
 			}
-			
-
 		};
 		
+	}
+	private void sort(){
+		String item=mSpinner.getSelectedItem().toString();
+		if(item.equals("µÆºÅÉýÐò")){
+			idSort1();
+		}else if(item.equals("ºìµÆÉýÐò")){
+			redSort1();
+		}else if(item.equals("ÂÌµÆÉýÐò")){
+			greenSort1();
+		}else if(item.equals("»ÆµÆÉýÐò")){
+			yellowSort1();
+		}else if(item.equals("µÆºÅ½µÐò")){
+			idSort2();
+		}else if(item.equals("ºìµÆ½µÐò")){
+			redSort2();
+		}else if(item.equals("ÂÌµÆ½µÐò")){
+			greenSort2();
+		}else if(item.equals("»ÆµÆ½µÐò")){
+			yellowSort2();
+		}
 	}
 	private void parseJson(int count) throws Exception{
 		
@@ -126,24 +144,9 @@ public class MainActivity extends ActionBarActivity {
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				//Ò×´íµã:toStirng
-				String item=arr_adapter.getItem(arg2).toString();
-				if(item.equals("µÆºÅÉýÐò")){
-					idSort1();
-				}else if(item.equals("ºìµÆÉýÐò")){
-					redSort1();
-				}else if(item.equals("ÂÌµÆÉýÐò")){
-					greenSort1();
-				}else if(item.equals("»ÆµÆÉýÐò")){
-					yellowSort1();
-				}else if(item.equals("µÆºÅ½µÐò")){
-					idSort2();
-				}else if(item.equals("ºìµÆ½µÐò")){
-					redSort2();
-				}else if(item.equals("ÂÌµÆ½µÐò")){
-					greenSort2();
-				}else if(item.equals("»ÆµÆ½µÐò")){
-					yellowSort2();
-				}
+				mList.clear();
+				setThread();
+				mThread.start();
 				
 			}
 
@@ -158,8 +161,10 @@ public class MainActivity extends ActionBarActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				
-				mHandler.sendEmptyMessage(UP_DATE);
+				mList.clear();
+				setThread();
+				mThread.start();
+				//mHandler.sendEmptyMessage(UP_DATE);
 
 			}
 		});
@@ -176,8 +181,9 @@ public class MainActivity extends ActionBarActivity {
 	private void initData() {
 		mList=new ArrayList<ItemBean>();
 		arr_list=new ArrayList<String>();
-		arr_list.add("µÆºÅÉýÐò");
+		
 		arr_list.add("ºìµÆÉýÐò");
+		arr_list.add("µÆºÅÉýÐò");
 		arr_list.add("ÂÌµÆÉýÐò");
 		arr_list.add("»ÆµÆÉýÐò");
 		arr_list.add("µÆºÅ½µÐò");
@@ -200,7 +206,6 @@ public class MainActivity extends ActionBarActivity {
 					break;
 				case SHOW_DIALOG:
 					mDialog.show();
-				
 					break;
 				}
 				return false;

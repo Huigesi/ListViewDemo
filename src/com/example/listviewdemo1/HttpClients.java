@@ -60,8 +60,8 @@ public class HttpClients {
 			httpURLConnection.setRequestMethod("POST");
 			httpURLConnection.setRequestProperty("Content-type", "application/json");
 			httpURLConnection.setDoOutput(true);
-			httpURLConnection.setUseCaches(false);
-			httpURLConnection.setConnectTimeout(30000);
+			/*httpURLConnection.setUseCaches(false);
+			httpURLConnection.setConnectTimeout(30000);*/
 			httpURLConnection.connect();
 			OutputStream outputStream=httpURLConnection.getOutputStream();
 			outputStream.write(postUrl.getBytes("utf-8"));
