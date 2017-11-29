@@ -114,7 +114,7 @@ public class MainActivity extends ActionBarActivity {
 		mAdapter=new DataAdapter(MainActivity.this, mList);
 		mListView.setAdapter(mAdapter);
 		arr_adapter=new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item,arr_list);
-		arr_adapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
+		arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mSpinner.setAdapter(arr_adapter);
 
 	}
@@ -158,7 +158,7 @@ public class MainActivity extends ActionBarActivity {
 
 			@Override
 			public void onClick(View arg0) {
-			
+				
 				mHandler.sendEmptyMessage(UP_DATE);
 
 			}
