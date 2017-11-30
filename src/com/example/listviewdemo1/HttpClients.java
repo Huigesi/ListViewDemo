@@ -31,7 +31,6 @@ public class HttpClients {
 
 	public static String sendMessage(String url, String postUrl) {
 		String result = "";
-
 		/*  HttpClient mHttpClient=new DefaultHttpClient(); 
 		  HttpPost post =new HttpPost(url);
 		 try {
@@ -50,9 +49,7 @@ public class HttpClients {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		 */
-	
 		ByteArrayOutputStream bao=new ByteArrayOutputStream();
 		HttpURLConnection httpURLConnection=null;
 		try {

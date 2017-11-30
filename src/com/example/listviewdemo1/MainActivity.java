@@ -50,6 +50,7 @@ public class MainActivity extends ActionBarActivity {
 	private ArrayAdapter<String> arr_adapter;
 	private Spinner mSpinner;
 
+	int flag=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +75,6 @@ public class MainActivity extends ActionBarActivity {
 				mHandler.sendEmptyMessage(SHOW_DIALOG);
 				//易错点：官方的post参数也有错，应该为Id,不是ID。
 				mString=HttpClients.sendMessage(mPath,"{\"TrafficLightId\":" +count+ "}");
-				
 				Log.i("mString",mString);
 					try {
 						parseJson(count);
@@ -83,7 +83,6 @@ public class MainActivity extends ActionBarActivity {
 						e.printStackTrace();
 					}
 				count++;
-				
 				}
 				super.run();
 				sort();
@@ -91,7 +90,6 @@ public class MainActivity extends ActionBarActivity {
 				mHandler.sendEmptyMessage(UP_DATE);
 			}
 		};
-		
 	}
 	private void sort(){
 		String item=mSpinner.getSelectedItem().toString();
@@ -134,7 +132,6 @@ public class MainActivity extends ActionBarActivity {
 		arr_adapter=new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item,arr_list);
 		arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mSpinner.setAdapter(arr_adapter);
-
 	}
 
 	private void setListener() {
@@ -143,20 +140,15 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				//易错点:toStirng
 				mList.clear();
 				setThread();
 				mThread.start();
-				
 			}
-
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				
 			}
 		});
 		
-
 		mButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -202,7 +194,7 @@ public class MainActivity extends ActionBarActivity {
 				mDialog.dismiss();
 				switch (msg.what) {
 				case UP_DATE:
-					mAdapter.notifyDataSetChanged();
+					 update();
 					break;
 				case SHOW_DIALOG:
 					mDialog.show();
@@ -212,6 +204,13 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 		
+	}
+	public void update(){
+		if(flag==1){
+			mSpinner.getSelectedItem().toString();
+			sort();
+		}
+		mAdapter.notifyDataSetChanged();
 	}
 
 	private void getDialog() {
