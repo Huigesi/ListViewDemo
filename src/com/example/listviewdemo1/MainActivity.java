@@ -12,8 +12,10 @@ import org.json.JSONObject;
 
 
 
+
 import com.example.listviewdemo1.MainActivity;
 import com.example.listviewdemo1.SetDialog;
+import com.example.listviewdemo1.R;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -43,7 +45,8 @@ public class MainActivity extends ActionBarActivity {
 	private DataAdapter mAdapter;
 	private Handler mHandler;
 	private List<ItemBean> mList;
-	private Button mButton;
+	private Button button_find;
+	private Button button_all;
 	private ListView mListView;
 	private Thread mThread;
 	private String mString;
@@ -153,7 +156,7 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 		
-		mButton.setOnClickListener(new View.OnClickListener() {
+		button_find.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
@@ -189,9 +192,10 @@ public class MainActivity extends ActionBarActivity {
 	
 
 	private void initView() {
-		mButton=(Button)findViewById(R.id.button);
+		button_find=(Button)findViewById(R.id.button);
 		mListView =(ListView)findViewById(R.id.listview);
 		mSpinner = (Spinner) findViewById(R.id.spinner);
+		button_all=(Button)findViewById(R.id.button_all);
 	}
 
 
