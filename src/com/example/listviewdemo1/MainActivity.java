@@ -11,6 +11,10 @@ import org.json.JSONObject;
 
 
 
+
+import com.example.listviewdemo1.MainActivity;
+import com.example.listviewdemo1.SetDialog;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -160,6 +164,27 @@ public class MainActivity extends ActionBarActivity {
 
 			}
 		});
+	}
+	public void settingDialog() {
+		final SetDialog mSetDialog=new SetDialog(MainActivity.this);
+		mSetDialog.setCallBack(new SetDialog.MyCallBack() {
+			
+			@Override
+			public void ok() {
+				// TODO Auto-generated method stub
+				mSetDialog.dismiss();
+			}
+			
+			@Override
+			public void cancel() {
+				// TODO Auto-generated method stub
+				mSetDialog.dismiss();
+			}
+		});
+		mSetDialog.setTitle("∫Ï¬Ãµ∆…Ë÷√");
+		mSetDialog.setCancelable(true);
+		mSetDialog.show();
+	
 	}
 	
 
