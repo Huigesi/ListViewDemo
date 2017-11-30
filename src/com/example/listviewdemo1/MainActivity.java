@@ -192,7 +192,7 @@ public class MainActivity extends ActionBarActivity {
 	
 
 	private void initView() {
-		button_find=(Button)findViewById(R.id.button);
+		button_find=(Button)findViewById(R.id.button_find);
 		mListView =(ListView)findViewById(R.id.listview);
 		mSpinner = (Spinner) findViewById(R.id.spinner);
 		button_all=(Button)findViewById(R.id.button_all);
